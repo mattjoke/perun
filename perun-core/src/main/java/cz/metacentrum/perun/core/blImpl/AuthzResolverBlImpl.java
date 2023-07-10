@@ -4425,7 +4425,7 @@ public class AuthzResolverBlImpl implements AuthzResolverBl {
 			throw new InternalErrorException("MFA timestamp "  + returnedAuthTime + " could not be parsed", e);
 		}
 		if (parsedReturnedAuthTime.isAfter(Instant.now())) {
-			throw new InternalErrorException("MFA auth timestamp " + returnedAuthTime + " was greater than current time");
+			throw new InternalErrorException("MFA auth timestamp " + parsedReturnedAuthTime.toEpochMilli() + " was greater than current time" + Instant.now().toEpochMilli() + " for user " + returnedAuthTime);
 		}
 
 		long mfaTimeoutInSec = Duration.ofMinutes(BeansUtils.getCoreConfig().getMfaAuthTimeout()).getSeconds();
