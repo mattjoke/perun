@@ -376,7 +376,7 @@ public class UsersManagerEntry implements UsersManager {
 		Utils.notNull(user, "user");
 
 		// Authorization
-		if(!AuthzResolver.isAuthorized(sess, Role.PERUNADMIN)) {
+		if(!(AuthzResolver.isAuthorized(sess, Role.PERUNADMIN) || AuthzResolver.isAuthorized(sess, Role.PERUNADMINBA))) {
 			throw new PrivilegeException(sess, "createUser");
 		}
 
